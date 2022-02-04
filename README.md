@@ -1,5 +1,12 @@
 # RNR-kinetic-modeling
 
+Non-standard Python libaries required:
+- numpy (for pretty much everything)
+- pandas (for parsing csv input file)
+- scipy (for matrix exponentiation)
+- numba (code acceleration)
+- tqdm (progress bar)
+
 In the current form, this code allows you to sample sets of rate constants for a process such as radical transfer in RNR keeping in mind an arbitrary set of constraints and a cost function consisting of the absolute value of the difference between some desired decay rate and the rate of decay produced by the current set of rate constants. This code can easily be modified to explore rate constants for something other than RNR as long as
 
 1) you can define a suitable cost function like the rate of decay of a species to guide your sampling
