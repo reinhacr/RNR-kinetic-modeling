@@ -7,7 +7,7 @@ In the current form, this code allows you to sample sets of rate constants for a
 3) you understand how the input files work
 
 The code is structured as follows:
-the main module is called **decayMonteCarlo_full.py**
+the main module is called **decayMonteCarlo_full_matrix_exp.py**
   this controls all the other code and contains the function that runs the Monte Carlo sampling of rate constants. This is where you can define constraints on the rate constants (see, for example, the constaints set near line 90) and the cost function (line 24).
 
 this module depends on the modules **run_km_fx.py** and **km_core_fx.py**, as well as the directory **myTools**, which contains the function that reads the main (text) input file. **run_km_fx.py** contains functions to run Gillespie simulations of dynamics, perform exponential fitting of radical decay to evaluate the cost function, run Gillespie simulations to steady state, and to solve the rate matrix (matrix exponential solution to a system of ODEs). **km_core_fx.py** contains functions to parse the csv input file, and take a Gillespie step (numba-compiled for speed).
