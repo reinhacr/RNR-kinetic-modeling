@@ -15,22 +15,33 @@ this module depends on the modules **run_km_fx.py** and **km_core_fx.py**, as we
 The code requires **two** input files, one "text" input file and one csv input file. The text input file contains a path to the csv file and various arguments. The csv input file contains the full description of the chemical reactions being studied. The arguments in the text input file are:
 
 infile: [your csv file]
+
 out: [outfile]
+
 logfile: [logfile]
 
-# gillespie and fitting parameters
+### gillespie and fitting parameters
 monitoredIdx: [index of chemical species to monitor (from csv)]
+
 max_steps: [max number of steps to take when seeking steady state]
+
 averagingSteps: [number of steps to use at a time when determining steady state]
+
 tol: [tolerance to use when determining steady state]
+
 minRSquared: [minimum r^2 to accept when fitting a exponential]
 
-# monte carlo parameters
+### monte carlo parameters
 nSteps: [number of Monte Carlo steps]
+
 highTemp: [initial "temperature" for simulated annealing]
+
 lowTemp: [final "temperature" for simulated annealing, can be set to same as highTemp for steady "temperature"]
+
 coolingSchedule: [linear or exponential]
+
 tauWanted: [desired decay rate]
+
 rateStep: [how much to vary rate constants between Monte Carlo steps]
 
 final_simulation_time: [length of Gillespie simulation]
