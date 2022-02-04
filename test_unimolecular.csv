@@ -1,0 +1,11 @@
+﻿species_idx,species_names,counts,counts_max,reaction,reaction_idx,rate_constants,species,,stoich,,n_reactants,RT_direction,orig_rate_cnst
+0,Y122_dot,0,1.00E+04,Y356_DOT -> Y122_DOT,0,350,1,0,-1,1,1,back,350
+1,Y356_dot,0,1.00E+04,Y122_DOT -> Y356_DOT,1,0.0000001,0,1,-1,1,1,fwd,0.0000001
+2,Y731_dot,0,1.00E+04,Y731_DOT -> Y356_DOT,2,350,2,1,-1,1,1,back,350
+3,Y730_dot,0,1.00E+04,Y356_DOT -> Y731_DOT,3,944.1,1,2,-1,1,1,fwd,944.1
+4,C439_dot,0,1.00E+04,Y730_DOT -> Y731_DOT,4,5555.555556,3,2,-1,1,1,back,5555.555556
+5,Re*,1.00E+04,1.00E+04,Y731_DOT -> Y730_DOT,5,10000,2,3,-1,1,1,fwd,10000
+,,,,C439_DOT -> Y730_DOT,6,8000,4,3,-1,1,1,back,8000
+,,,,Y730_DOT  -> C439_DOT,7,6400,3,4,-1,1,1,fwd,6400
+,,,,Y356_DOT -> Re*,8,0,1,5,-1,1,1,fwd,0
+,,,,Re* -> Y356_DOT,9,268337.287,5,1,-1,1,1,back,268337.287

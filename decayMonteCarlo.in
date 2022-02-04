@@ -1,0 +1,21 @@
+# input/output
+infile: test_unimolecular.csv
+out: tauWanted_0.0
+logfile: log
+
+# gillespie and fitting parameters
+monitoredIdx: 1
+max_steps: 100000
+averagingSteps: 1000
+tol: 1
+minRSquared: 0.95
+
+# monte carlo parameters
+nSteps: 1000
+highTemp: 0.1
+lowTemp: 0.0
+coolingSchedule: exponential
+tauWanted: 0.0
+rateStep: 1000.0
+
+final_simulation_time: 0.01
