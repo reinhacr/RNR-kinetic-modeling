@@ -40,8 +40,40 @@ lowTemp: [final "temperature" for simulated annealing, can be set to same as hig
 
 coolingSchedule: [linear or exponential]
 
+
 tauWanted: [desired decay rate]
 
 rateStep: [how much to vary rate constants between Monte Carlo steps]
 
 final_simulation_time: [length of Gillespie simulation]
+
+
+
+An example csv input file is provided.
+The column names are:
+
+species_idx: self-explanatory
+
+species_name: self-explanatory
+
+initial count: self-explanatory
+
+counts_max: self-explanatory and actually no longer necessary
+
+reaction: description of reaction for humans
+
+reaction_idx: self-explanatory
+
+rate_constants: in inverse seconds
+
+species: the indices of the species involved in the reaction
+
+stoich: the corresponding stoichiometric changes associated with each species
+
+n_reactants: self-explanatory (needed for Gillespie code to update counts correctly)
+
+
+Please do not deviate from this csv input format or you may get errors or worse, undefined behavior. Also please note that the csv input file must be a real csv, not an xlsx or something like that.
+
+
+If you have questions, don't hesitate to email us at daniel.konstantinovsky@yale.edu or clorice.reinhardt@yale.edu (this one only until May)
