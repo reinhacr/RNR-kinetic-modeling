@@ -86,4 +86,4 @@ n_reactants: self-explanatory (needed for Gillespie code to update counts correc
 Please do not deviate from this csv input format or you may get errors or worse, undefined behavior. Also please note that the csv input file must be a real csv, not an xlsx or something like that.
 
 
-If you have questions, don't hesitate to email us at daniel.konstantinovsky@yale.edu or clorice.reinhardt@yale.edu (this one only until May)
+If you have questions, don't hesitate to email us at daniel.konstantinovsky@yale.edu or clorice.reinhardt@aya.yale.edu
