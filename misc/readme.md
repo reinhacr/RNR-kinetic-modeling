@@ -16,3 +16,5 @@ Not peer reviewed or included in any published work, but collection of rate cons
 General advice:
 
 The code as deposited is very useful. If you want to obtain plots for different radical amounts over time, extend the time for which the kinetic model is solved beyond the shorter time periods used to compare to experimental data and add additional monitored indexes. This is generally not recommended to do during Monte Carlo/Simulated Annealing runs and initial exploration of rate constant space as it will significantly increase the time required for a calculation. First, find a desired set of rate constants, inspect the exponential fit and Y356 profile (if you are sticking true to our original photoRNR model), then solved for other radical amounts over time while not making use of the Monte Carlo/Simulated Annealing framework. 
+
+If extending amount of time that rate matrix is solved, please adjust nSteps so resolution can be tuned and you can still get enough time points out to suite your purpose
