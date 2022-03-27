@@ -22,7 +22,7 @@ You run it by typing **python decayMonteCarlo_full_matrix_exp.py [text_infile]**
 
 this module depends on the modules **run_km_fx.py** and **km_core_fx.py**, as well as the directory **myTools**, which contains the function that reads the main (text) input file. **run_km_fx.py** contains functions to run Gillespie simulations of dynamics, perform exponential fitting of radical decay to evaluate the cost function, run Gillespie simulations to steady state, and to solve the rate matrix (matrix exponential solution to a system of ODEs). **km_core_fx.py** contains functions to parse the csv input file, and take a Gillespie step (numba-compiled for speed).
 
-The code requires **two** input files, one "text" input file and one csv input file. The text input file contains a path to the csv file and various arguments. The csv input file contains the full description of the chemical reactions being studied. The arguments in the text input file are:
+The code requires **two** input files, one "text" input file and one csv input file. The text input file contains a path to the csv file and various arguments. The csv input file contains the full description of the chemical reactions being studied. The text input file assumes units are in seconds, so please input parameters accordingly. The arguments in the text input file are:
 
 infile: [your csv file]
 
@@ -50,12 +50,13 @@ lowTemp: [final "temperature" for simulated annealing, can be set to same as hig
 
 coolingSchedule: [linear or exponential]
 
-
-tauWanted: [desired decay rate]
+tauWanted: [desired decay rate in seconds]
 
 rateStep: [how much to vary rate constants between Monte Carlo steps]
 
 final_simulation_time: [length of Gillespie simulation]
+
+solveMatrixTime: [length of time to solve rate matrix for]
 
 
 
@@ -82,8 +83,9 @@ stoich: the corresponding stoichiometric changes associated with each species
 
 n_reactants: self-explanatory (needed for Gillespie code to update counts correctly)
 
+Stoichiometric matrices are common in kinetic modeling and systems biology. For explanation of this format, this is a [good resource](https://www.mathworks.com/help/simbio/ug/determining-the-stoichiometry-matrix-for-a-model.html)
 
-Please do not deviate from this csv input format or you may get errors or worse, undefined behavior. Also please note that the csv input file must be a real csv, not an xlsx or something like that.
+Please do not deviate from this csv input format or you may get errors or worse, undefined behavior. Also please note that the csv input file must be a real csv, not an xlsx or something like that. Check spacing and that all columns are defined appropriately.
 
 
-If you have questions, don't hesitate to email us at daniel.konstantinovsky@yale.edu or clorice.reinhardt@yale.edu (this one only until May)
+If you have questions, don't hesitate to email us at daniel.konstantinovsky@yale.edu or clorice.reinhardt@aya.yale.edu
