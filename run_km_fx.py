@@ -127,51 +127,52 @@ def exponentialFitTrajectory(times, counts, minRSquared=0.95):
     # time = data["time"].values
     # counts = data[speciesToFit]
 
-    # fit to 3 microseconds onward, like in experiment
+    # fit to 3-90 microseconds, like in experiment. 3-76.5 is used for 235F3Y photoRNRs
     mask = np.logical_and(times > 3.0E-6, times < 90.0E-6)
 
-    # times = times[mask]
-    # counts = counts[mask]
-
-    # import matplotlib.pyplot as plt
-
-    # take the first half of the decay to remove the flat part (can cause fit to fail)
-    # time = time[0:len(time) // 2]
-    # counts = counts[0:len(counts) // 2]
-
-    plt.plot(times, counts)
-    plt.show()
-
+    times = times[mask]
+    counts = counts[mask]
+  
     def monoExp(x, m, k, b):
         return m * np.exp(-k * x) + b
 
     p0 = (0.0, 0.0, 0.0)  # guess
 
+    def biExp(x, a, j, c, d):
+        return a * np.exp(-j * x) + c * np.exp(-d * x)
+
+    p0_2 = (0.0, 0.0, 0.0, 0.0) # guess
     try:
         params, cv = optimize.curve_fit(monoExp, times, counts, p0)
         m, k, b = params
 
         tau = 1 / k
-        # squaredDiffs = np.square(counts - monoExp(time, m, k, b))
-        # squaredDiffsFromMean = np.square(counts - np.mean(counts))
-        # rSquared = 1 - np.sum(squaredDiffs) / np.sum(squaredDiffsFromMean)
-        # print(rSquared)
-        # if rSquared < minRSquared:
-        #     raise RuntimeError(f"exponential fit failed: rSquared = {rSquared} is too small")
-        # plt.plot(time, monoExp(time, m, k, b), color='r',label='fit: m=%5.3f, k=%5.3f, b=%5.3f' % tuple(params))
-        # plt.plot(time, counts, color='b', label='Y356 counts')
-        # plt.ylabel("counts")
-        # plt.xlabel("time")
-        # plt.legend()
-        # plt.show()
-        # plt.plot(time, monoExp(time, m, k, b))
-        # plt.show()
+        print("Doing single exp. fitting printing rsquared")
 
-        # fit = np.polyfit(time, np.log(counts), 1)
-        # plt.plot(time, np.log(counts))
-        # print(fit)
-        # print(tau)
-        # tau = 1 / -fit[0]
+        squaredDiffs = np.square(counts - monoExp(times, m, k, b))
+        squaredDiffsFromMean = np.square(counts - np.mean(counts))
+        rSquared = 1 - np.sum(squaredDiffs) / np.sum(squaredDiffsFromMean)
+        print(rSquared)
+        if rSquared < minRSquared:
+              raise Exception(f"single exponential fit failed: rSquared = {rSquared} is too small")
+
+# Now do Bi. exp fitting. We don't abstract a tau from this, so only the tau from the single exponential fit will be returned. These are just sanity checks to see if the Y356 radical decay is no longer suitable to fit with a single exponential
+        
+        popt, pcov = optimize.curve_fit(biExp, times, counts, p0_2)
+        a, j, c, d = popt
+        squaredDiffs = np.square(counts - biExp(times, a, j, c, d))
+        squaredDiffsFromMean = np.square(counts - np.mean(counts))
+        rSquared_bi = 1 - np.sum(squaredDiffs) / np.sum(squaredDiffsFromMean)
+        print("Doing biexp. fit")
+        print(rSquared_bi)
+
+##### Now evaluate fits. Single exp and bi exp will give similiar R^2 if single exp is suitable, where as if bi.exp is significantly, the code throws an error. A value of 0.01-0.03 works well in combination with a minimum R^2 value listed above.
+        
+        diff_fits = rSquared_bi - rSquared
+        print(diff_fits)
+        if diff_fits > 0.01:
+             raise Exception(f"Bi-exponential fit gives better rSquared")
+
     except RuntimeError:
         tau = np.nan
 
