@@ -107,7 +107,7 @@ def decayMonteCarlo(*, param, monitoredIdx, max_steps, averagingSteps, tol,
             param.rate_constants = oldRateConstants
 
         allEnergies[i] = energy
-        tau_print = tau * 10e5
+        tau_print = tau * 1e6
         # print("step:", i, "of", nSteps, " temperature:", temperatures[i], " energy:", energy)
         log.write(f"step: {i} of {nSteps}, temperature: {temperatures[i]}, energy: {energy}\n")
         log.flush()
