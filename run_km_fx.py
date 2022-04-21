@@ -167,6 +167,7 @@ def exponentialFitTrajectory(times, counts, minRSquared=0.95):
         print(rSquared_bi)
 
 ##### Now evaluate fits. Single exp and bi exp will give similiar R^2 if single exp is suitable, where as if bi.exp is significantly, the code throws an error. A value of 0.01-0.03 works well in combination with a minimum R^2 value listed above.
+
         
         diff_fits = rSquared_bi - rSquared
         print(diff_fits)
