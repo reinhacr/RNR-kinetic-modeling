@@ -22,15 +22,7 @@ def decayMonteCarlo(*, param, monitoredIdx, max_steps, averagingSteps, tol,
     #times, counts = runToSteadyState(param, monitoredIdx, max_steps, averagingSteps, tol)
     #print(param.initial_counts)
     times, counts = solveRateMatrix(param, monitoredIdx, solveMatrixTime)
-    #print(param)
-    # print(times)
-    # print(counts)
-    #exit()
-    # import matplotlib.pyplot as plt
-    # plt.plot(times, counts, label="sim annealing")
-    # plt.plot(times2, counts2, label="matrix exp")
-    # plt.show()
-    # exit()
+ 
     # -----------------------------------------------------------------------
     #param.counts = originalCounts  # runToSteadyState changes counts, see above
 
@@ -97,7 +89,7 @@ def decayMonteCarlo(*, param, monitoredIdx, max_steps, averagingSteps, tol,
             param.rate_constants = oldRateConstants
 
         allEnergies[i] = energy
-        tau_print = tau * 10e5
+        tau_print = tau * 1e6
         # print("step:", i, "of", nSteps, " temperature:", temperatures[i], " energy:", energy)
         log.write(f"step: {i} of {nSteps}, temperature: {temperatures[i]}, energy: {energy}\n")
         log.flush()
