@@ -127,10 +127,12 @@ def exponentialFitTrajectory(times, counts, minRSquared=0.95):
     # time = data["time"].values
     # counts = data[speciesToFit]
 
-    # fit to 3 microseconds to 90 microseconds, like in experiment. This is 3-76.5 microseconds for 235F3Y systems.
+    # fit to 3-90 microseconds, like in experiment. 3-76.5 is used for 235F3Y photoRNRs
     mask = np.logical_and(times > 3.0E-6, times < 90.0E-6)
 
-
+    times = times[mask]
+    counts = counts[mask]
+  
     def monoExp(x, m, k, b):
         return m * np.exp(-k * x) + b
 
@@ -164,7 +166,8 @@ def exponentialFitTrajectory(times, counts, minRSquared=0.95):
         print("Doing biexp. fit")
         print(rSquared_bi)
 
-##### Now evaluate fits. Single exp and bi exp will give similiar R^2 if single exp is a suitable fit, where as if bi.exp is significantly, the code throws an error. A value of 0.01-0.03 works well in combination with a minimum R^2 value listed above.
+##### Now evaluate fits. Single exp and bi exp will give similiar R^2 if single exp is suitable, where as if bi.exp is significantly, the code throws an error. A value of 0.01-0.03 works well in combination with a minimum R^2 value listed above.
+
         
         diff_fits = rSquared_bi - rSquared
         print(diff_fits)
